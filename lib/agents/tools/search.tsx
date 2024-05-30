@@ -67,10 +67,16 @@ async function tavilySearch(
     body: JSON.stringify({
       api_key: apiKey,
       query,
-      max_results: maxResults < 5 ? 5 : maxResults,
+      // max_results: maxResults < 5 ? 5 : maxResults,
+      max_results: 3,
       search_depth: searchDepth,
-      include_images: true,
-      include_answers: true
+      // include_images: true,
+      include_images: false,
+      include_answers: true,
+
+      // github search
+      include_raw_content: true,
+      include_domains: ['github.com']
     })
   })
 

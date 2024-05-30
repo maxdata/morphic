@@ -61,6 +61,9 @@ export const retrieveTool = ({ uiStream, fullResponse }: ToolProps) => ({
           {`An error occurred while retrieving "${url}".This webiste may not be supported.`}
         </Card>
       )
+
+      console.log('jina', results)
+
       return results
     }
 

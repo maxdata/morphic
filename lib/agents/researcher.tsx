@@ -66,9 +66,7 @@ export async function researcher(
           fullResponse += delta.textDelta
           sText.update(fullResponse)
         }
-
-        console.log('fullResponse', delta)
-
+        // console.log('fullResponse', delta)
         break
       case 'tool-call':
         toolCalls.push(delta)
