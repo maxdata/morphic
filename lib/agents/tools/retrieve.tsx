@@ -9,6 +9,9 @@ export const retrieveTool = ({ uiStream, fullResponse }: ToolProps) => ({
   description: 'Retrieve content from the web',
   parameters: retrieveSchema,
   execute: async ({ url }: { url: string }) => {
+    // Jina is never called
+    console.log('retrieveTool', url)
+
     let hasError = false
     // Append the search section
     uiStream.append(<SearchSkeleton />)

@@ -51,6 +51,7 @@ async function submit(formData?: FormData, skip?: boolean) {
   const maxMessages = useSpecificAPI ? 5 : 10
   // Limit the number of messages to the maximum
   messages.splice(0, Math.max(messages.length - maxMessages, 0))
+
   // Get the user input from the form data
   const userInput = skip
     ? `{"action": "skip"}`
