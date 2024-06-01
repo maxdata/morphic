@@ -95,6 +95,8 @@ async function submit(formData?: FormData, skip?: boolean) {
     // If the user skips the task, we proceed to the search
     if (!skip) action = (await taskManager(messages)) ?? action
 
+    console.log('action', action)
+
     if (action.object.next === 'inquire') {
       // Generate inquiry
       const inquiry = await inquire(uiStream, messages)

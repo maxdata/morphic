@@ -5,6 +5,13 @@ import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { getModel } from '../utils'
 
+import { createOpenAI } from '@ai-sdk/openai'
+
+const openai = createOpenAI({
+  baseURL: process.env.LLM_BASE_URL || '',
+  apiKey: ''
+})
+
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
   sText: ReturnType<typeof createStreamableValue<string>>,
@@ -21,7 +28,8 @@ export async function researcher(
 
   const currentDate = new Date().toLocaleString()
   const result = await streamText({
-    model: getModel(),
+    // model: getModel(),
+    model: openai('gpt-3.5-turbo'),
     maxTokens: 2500,
     system: `
     If there are any images relevant to your answer, be sure to include them as well.
@@ -54,7 +62,13 @@ export async function researcher(
   // Process the response
   const toolCalls: ToolCallPart[] = []
   const toolResponses: ToolResultPart[] = []
+
   for await (const delta of result.fullStream) {
+    // https://sourcegraph.com/github.com/vercel/ai/-/blob/packages/core/rsc/stream-ui/stream-ui.tsx
+
+    // It filter out if tool_calls not in valide
+    console.log('delta', delta)
+
     switch (delta.type) {
       case 'text-delta':
         if (delta.textDelta) {
