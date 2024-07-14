@@ -4,25 +4,33 @@ An AI-powered search engine with a generative UI.
 
 ![capture](/public/capture-240404_blk.png)
 
-### Note
+> [!NOTE]
+> Please note that there are differences between this repository and the official website [morphic.sh](https://morphic.sh). The official website is a fork of this repository with additional features such as authentication, which are necessary for providing the service online. The core source code of Morphic resides in this repository, and it's designed to be easily built and deployed.
 
-Please note that there are differences between this repository and the official website [morphic.sh](morphic.sh). The official website is a fork of this repository with additional features such as authentication, which are necessary for providing the service online. The core source code of Morphic resides in this repository, and it's designed to be easily built and deployed. When using Morphic, please keep in mind the different roles of the repository and the website.
+## 🗂️ Overview
 
-## 🔍 Overview
-
+- 🛠 [Features](#-features)
 - 🧱 [Stack](#-stack)
 - 🚀 [Quickstart](#-quickstart)
 - 🌐 [Deploy](#-deploy)
+- 🔎 [Search Engine](#-search-engine)
 - ✅ [Verified models](#-verified-models)
 
-### 🚗 Roadmap [WIP]
+## 🛠 Features
 
-- [x] Enable specifying the model to use (only writer agent)
-- [x] Implement search history functionality
-- [x] Develop features for sharing results
-- [x] Implement functionality to get answers from specified URL
-- [x] Add video support for search functionality
-- [ ] Implement RAG support
+- Search and answer using GenerativeUI
+- Understand user's questions
+- Search history functionality
+- Share search results ([Optional](https://github.com/miurla/morphic/blob/main/.env.local.example))
+- Video search support ([Optional](https://github.com/miurla/morphic/blob/main/.env.local.example))
+- Get answers from specified URLs
+- Use as a search engine [※](#-search-engine)
+- Support for providers other than OpenAI
+  - Google Generative AI Provider [※](https://github.com/miurla/morphic/issues/192)
+  - Anthropic Provider [※](https://github.com/miurla/morphic/pull/239)
+  - Ollama Provider ([Unstable](https://github.com/miurla/morphic/issues/215))
+- Specify the model to generate answers
+  - Groq API support [※](https://github.com/miurla/morphic/pull/58)
 
 ## 🧱 Stack
 
@@ -107,9 +115,39 @@ Host your own live version of Morphic with Vercel or Cloudflare Pages.
 
 **The build error needs to be fixed: [issue](https://github.com/miurla/morphic/issues/114)**
 
+## 🔎 Search Engine
+
+### Setting up the Search Engine in Your Browser
+
+If you want to use Morphic as a search engine in your browser, follow these steps:
+
+1. Open your browser settings.
+2. Navigate to the search engine settings section.
+3. Select "Manage search engines and site search".
+4. Under "Site search", click on "Add".
+5. Fill in the fields as follows:
+   - **Search engine**: Morphic
+   - **Shortcut**: morphic
+   - **URL with %s in place of query**: `https://morphic.sh/search?q=%s`
+6. Click "Add" to save the new search engine.
+7. Find "Morphic" in the list of site search, click on the three dots next to it, and select "Make default".
+
+This will allow you to use Morphic as your default search engine in the browser.
+
 ## ✅ Verified models
 
-List of verified models that can be specified to writers.
+### List of models applicable to all:
+
+- OpenAI
+  - gpt-4o
+  - gpt-4-turbo
+  - gpt-3.5-turbo
+- Google
+  - Gemini 1.5 pro [※](https://github.com/miurla/morphic/issues/192)
+- Ollama (Unstable)
+  - mistral/openhermes & Phi3/llama3 [※](https://github.com/miurla/morphic/issues/215)
+
+### List of verified models that can be specified to writers:
 
 - [Groq](https://console.groq.com/docs/models)
   - LLaMA3 8b

@@ -1,14 +1,14 @@
+import { tool } from 'ai'
 import { createStreamableValue } from 'ai/rsc'
 import { searchSchema } from '@/lib/schema/search'
-import { Card } from '@/components/ui/card'
 import { ToolProps } from '.'
 import { VideoSearchSection } from '@/components/video-search-section'
 
 // Start Generation Here
-export const videoSearchTool = ({ uiStream, fullResponse }: ToolProps) => ({
+export const videoSearchTool = ({ uiStream, fullResponse }: ToolProps) => tool({
   description: 'Search for videos from YouTube',
   parameters: searchSchema,
-  execute: async ({ query }: { query: string }) => {
+  execute: async ({ query }) => {
     let hasError = false
     // Append the search section
     const streamResults = createStreamableValue<string>()
@@ -34,12 +34,9 @@ export const videoSearchTool = ({ uiStream, fullResponse }: ToolProps) => ({
     }
 
     if (hasError) {
-      fullResponse += `\nAn error occurred while searching for videos with "${query}.`
-      uiStream.update(
-        <Card className="p-4 mt-2 text-sm">
-          {`An error occurred while searching for videos with "${query}".`}
-        </Card>
-      )
+      fullResponse = `An error occurred while searching for videos with "${query}.`
+      uiStream.update(null)
+      streamResults.done()
       return searchResult
     }
 
