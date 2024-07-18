@@ -14,6 +14,7 @@ export const getTools = ({ uiStream, fullResponse }: ToolProps) => {
       uiStream,
       fullResponse
     }),
+
     retrieve: retrieveTool({
       uiStream,
       fullResponse

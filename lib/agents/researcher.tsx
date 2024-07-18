@@ -40,6 +40,7 @@ export async function researcher(
     Limit your response to 200 tokens.
     Current date and time: ${currentDate}`,
     messages,
+
     // the chat takes input from tools
     tools: getTools({
       uiStream,
